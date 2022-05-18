@@ -1,1 +1,24 @@
-<p>homepage works!</p>
+<div
+      *ngIf="bookError$ | async"
+      style="background-color: red; padding: 10px"
+    > SERVER ERROR</div>
+
+    <form #f="ngForm" (ngSubmit)="addBookHandler(f)">
+      <input type="text" name="title" [ngModel]="(bookActive$ | async)?.title" required>
+      <input type="text" name="author" [ngModel]="(bookActive$ | async)?.author?.givenName" required>
+      <input type="text" name="ISBN" [ngModel]="(bookActive$ | async)?.ISBN" required>
+      <button type="submit" [disabled]="f.invalid">SAVE</button>
+      <button type="button" (click)="resetHandler(f)">RESET</button>
+    </form>
+
+    <hr>
+    <li
+      *ngFor="let book of (books$ | async)"
+      (click)="setActiveBookHandler(book)"
+      [style.color]="book.id === (bookActive$ | async)?.id ? 'orange' : null "
+    >
+      {{book.title}} - {{ book.ISBN}} - {{ book.author.givenName}}
+
+      <button (click)="deleteBookHandler(book.id, $event)">delete</button>
+    </li>
+    <hr>
