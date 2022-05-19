@@ -6,7 +6,9 @@ Small application to insert, update and delete a list of books
 
 ## Test the application
 
-Run `ng serve` or `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Checkout "main" branch and then run `ng serve` or `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+In "freature/multipleChapters" we can found the starting implementation of multiple chapters, I go deeper about this later in this document.
 
 ## Implementation
 
@@ -22,6 +24,8 @@ I didn't plan a dialog for the details at the beginning, but in the end I didn't
 
 Implement the possibility to insert multiple chapters with their title. I planned to add a formArray and autogenerate dynamic controls for the new chapters to do so. With a small " + " icon in the form I wanted add the possibility to add multiple chapters, this also would have fixed the bug that if I edit an already existing book and I set a new chapter title the previous chapters would have been overwritten.(To solve this bug is also possibile to subscribe to the activeBook and when I create the newBook to send in the dispatch I can use the spread operator to attach the previous values)
 The implementation is simple and I already did something like this in the past but it would require a little bit more time.
+
+I already started to implement this solution, it can be found in "freature/multipleChapters" (Yep I misspelled feature). It doesn't work yet but almost all the job is done.
 
 Fix the bug on the Authors select, when I try to update a book the Author field doesn't update with the activeBook's author selected. To solve this I think the best way is to subscribe to the activeBook observable in the ts and manually set the value from there with myForm.setValue(....)
 
