@@ -7,6 +7,13 @@ import { HomepageComponent } from './homepage.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
 
 const routes: Routes = [
   {
@@ -26,6 +33,13 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatSelectModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     SharedModule,

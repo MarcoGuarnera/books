@@ -1,19 +1,14 @@
 import { createAction, props } from '@ngrx/store';
 import { Book } from 'src/app/shared/models/book';
 
-export const loadBooks = createAction(
-  '[Books] load'
-);
+export const loadBooks = createAction('[Books] load');
 
 export const loadBooksSuccess = createAction(
   '[Books] load success',
-  props<{ books: Book[]}>()
+  props<{ books: Book[] }>()
 );
 
-export const loadBooksFailed = createAction(
-  '[Books] load failed',
-);
-
+export const loadBooksFailed = createAction('[Books] load failed');
 
 export const AddInBooksList = createAction(
   '[Books] add',
@@ -35,6 +30,4 @@ export const editBooks = createAction(
   props<{ book: Book }>()
 );
 
-export const resetActiveBook = createAction(
-  '[Books] reset active'
-);
+export const resetActiveBook = createAction('[Books] reset active');

@@ -1,1 +1,60 @@
-<p>book-form works!</p>
+<mat-card class="mat-elevation-z5 border card">
+  <mat-card-title>Add/Update Book</mat-card-title>
+  <div class="form-div">
+    <form [formGroup]="bookForm" *ngIf="bookForm" (ngSubmit)="addBookHandler()">
+      <mat-form-field class="margin" appearance="fill">
+        <mat-label>Title</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="titleFormControl"
+          placeholder="Book Title"
+          [ngModel]="(bookActive$ | async)?.title"
+          required
+        />
+        <mat-error *ngIf="bookForm.get('titleFormControl').invalid">
+          Title is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="margin" appearance="fill">
+        <mat-label>Select</mat-label>
+        <mat-select formControlName="authorFormControl" required>
+          <mat-option *ngFor="let author of (authors$ |async)" [value]="author">
+            <span>{{ author.givenName }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="margin" appearance="fill">
+        <mat-label>ISBN</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="ISBNFormControl"
+          placeholder="ISBN"
+          [ngModel]="(bookActive$ | async)?.ISBN"
+          required
+        />
+        <mat-error *ngIf="bookForm.get('ISBNFormControl').invalid">
+          ISBN is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- <input
+        type="text"
+        name="author"
+        [ngModel]="(bookActive$ | async)?.author?.givenName"
+        required
+      /> -->
+      <!-- <input
+        type="text"
+        name="ISBN"
+        [ngModel]="(bookActive$ | async)?.ISBN"
+        required
+      /> -->
+      <button type="submit" [disabled]="!bookForm.valid">SAVE</button>
+      <button type="button" (click)="resetHandler()">RESET</button>
+    </form>
+  </div>
+</mat-card>

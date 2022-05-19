@@ -1,0 +1,10 @@
+.span-div{
+  padding: 5px 5px 5px 20px;
+  border-left: 6px solid rgb(33, 150, 243) !important;
+  width: fit-content;
+  margin-top: 10px;
+}
+
+.card {
+  margin: 20px;
+}

@@ -1,1 +1,38 @@
-<p>books-list works!</p>
+<mat-card class="mat-elevation-z5 border card">
+  <mat-card-title>Books List</mat-card-title>
+
+  <div class="list">
+    <ng-container *ngFor="let book of books$ | async">
+      <div
+        class="span-div"
+        (click)="setActiveBookHandler(book)"
+        [style.color]="book.id === (bookActive$ | async)?.id ? 'orange' : null"
+      >
+        <span>
+          {{ book.title }}
+        </span>
+        -
+        <span> {{ book.author.givenName }} {{ book.author.surName }} </span>
+
+        <button
+          mat-icon-button
+          matTooltip="Book detail and update"
+          color="primary"
+          (click)="setActiveBookHandler(book)"
+          aria-label="Book detail and update"
+        >
+          <mat-icon>description</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          matTooltip="Delete book"
+          (click)="deleteBookHandler(book.id, $event)"
+          aria-label="delete book"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</mat-card>

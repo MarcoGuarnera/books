@@ -13,10 +13,13 @@ import { BooksState } from './features/store/reducers/books.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { BooksEffects } from './features/store/effects/books.effects';
+import { AuthorsState } from './features/store/reducers/authors.reducer';
+import { AuthorsEffects } from './features/store/effects/authors.effects';
 
 
 export interface AppState {
   books: BooksState;
+  authors: AuthorsState;
 }
 
 @NgModule({
@@ -34,7 +37,7 @@ export interface AppState {
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),
-    EffectsModule.forRoot([BooksEffects]),
+    EffectsModule.forRoot([BooksEffects, AuthorsEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]
