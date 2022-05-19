@@ -31,7 +31,7 @@ export class BookFormComponent implements OnInit {
   @Input() authors$: Observable<Author[]>;
 
   form: FormGroup;
-  fb: FormBuilder;
+  // fb: FormBuilder;
 
   get chapterFormArray(): FormArray {
     const chapterFormArray = this.form.get('formChapters') as FormArray;
@@ -53,7 +53,7 @@ export class BookFormComponent implements OnInit {
   //   chapters: this.bookForm.array([this.createChapterFormGroup()]),
   // });
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.

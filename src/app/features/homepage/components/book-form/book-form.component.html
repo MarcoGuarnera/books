@@ -24,7 +24,11 @@
 
       <mat-form-field class="margin" appearance="legacy">
         <mat-label>Author</mat-label>
-        <mat-select formControlName="authorFormControl" required [ngModel]="(bookActive$ | async)?.author">
+        <mat-select
+          formControlName="authorFormControl"
+          required
+          [ngModel]="(bookActive$ | async)?.author"
+        >
           <mat-option *ngFor="let author of authors$ | async" [value]="author">
             <span>{{ author.givenName }} {{ author.surName }}</span>
           </mat-option>
@@ -79,19 +83,26 @@
         />
       </mat-form-field>
 
-      <mat-form-field class="margin" appearance="legacy">
-        <mat-label>Chapter title</mat-label>
-        <input
-          type="text"
-          matInput
-          formControlName="chapterDateFormControl"
-          placeholder="Publishing Date"
-          required=""
-        />
-        <mat-error *ngIf="form.get('chapterDateFormControl').invalid">
-          A chapter title is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
+      <ng-container
+        *ngFor="
+          let formChapters of chapterFormArray?.controls;
+          let i = index;
+        "
+      >
+        <mat-form-field class="margin" appearance="legacy">
+          <mat-label>Chapter title</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="formChapters"
+            placeholder="Publishing Date"
+            required=""
+          />
+          <mat-error *ngIf="form.get('formChapters').invalid">
+            A chapter title is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
 
       <div class="actionButtons">
         <button
@@ -102,6 +113,15 @@
           [disabled]="!form.valid"
         >
           SAVE
+        </button>
+        <button
+          class="m-2"
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="addChapter()"
+        >
+          ADD CHAPTER
         </button>
         <button
           class="m-2"
