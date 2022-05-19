@@ -2,9 +2,9 @@
   <mat-card-title class="mb-2">Add/Update Book</mat-card-title>
   <div class="form-div">
     <form
-      [formGroup]="bookForm"
+      [formGroup]="form"
       #formDirective="ngForm"
-      *ngIf="bookForm && authors$"
+      *ngIf="form && authors$"
       (ngSubmit)="addBookHandler()"
     >
       <mat-form-field class="margin" appearance="legacy">
@@ -17,7 +17,7 @@
           [ngModel]="(bookActive$ | async)?.title"
           required
         />
-        <mat-error *ngIf="bookForm.get('titleFormControl').invalid">
+        <mat-error *ngIf="form.get('titleFormControl').invalid">
           Title is <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -41,7 +41,7 @@
           [ngModel]="(bookActive$ | async)?.ISBN"
           required
         />
-        <mat-error *ngIf="bookForm.get('ISBNFormControl').invalid">
+        <mat-error *ngIf="form.get('ISBNFormControl').invalid">
           ISBN is <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -88,7 +88,7 @@
           placeholder="Publishing Date"
           required=""
         />
-        <mat-error *ngIf="bookForm.get('chapterDateFormControl').invalid">
+        <mat-error *ngIf="form.get('chapterDateFormControl').invalid">
           A chapter title is <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -99,7 +99,7 @@
           mat-raised-button
           color="primary"
           type="submit"
-          [disabled]="!bookForm.valid"
+          [disabled]="!form.valid"
         >
           SAVE
         </button>

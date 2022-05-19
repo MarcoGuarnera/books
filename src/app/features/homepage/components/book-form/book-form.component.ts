@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
+  FormArray,
+  FormBuilder,
   FormControl,
   FormGroup,
   FormGroupDirective,
@@ -21,47 +23,76 @@ import { Book } from 'src/app/shared/models/book';
   templateUrl: './book-form.component.html',
   styleUrls: ['./book-form.component.css'],
 })
-export class BookFormComponent {
+export class BookFormComponent implements OnInit {
   /**
    * input with the observable from the store
    */
   @Input() bookActive$: Observable<Book>;
   @Input() authors$: Observable<Author[]>;
 
+  form: FormGroup;
+  fb: FormBuilder;
+
+  get chapterFormArray(): FormArray {
+    const chapterFormArray = this.form.get('formChapters') as FormArray;
+    return chapterFormArray ? chapterFormArray : null;
+  }
+
   /**
    * form group for the th inputs fields
    */
-  bookForm = new FormGroup({
-    titleFormControl: new FormControl('', [Validators.required]),
-    ISBNFormControl: new FormControl('', [Validators.required]),
-    authorFormControl: new FormControl('', [Validators.required]),
-    publisherFormControl: new FormControl(''),
-    editionFormControl: new FormControl(''),
-    publishingDateFormControl: new FormControl(''),
-    chapterDateFormControl: new FormControl('', [Validators.required]),
-  });
+
+  // bookForm = new FormGroup({
+  //   titleFormControl: new FormControl('', [Validators.required]),
+  //   ISBNFormControl: new FormControl('', [Validators.required]),
+  //   authorFormControl: new FormControl('', [Validators.required]),
+  //   publisherFormControl: new FormControl(''),
+  //   editionFormControl: new FormControl(''),
+  //   publishingDateFormControl: new FormControl(''),
+  //   chapterDateFormControl: new FormControl('', [Validators.required]),
+  //   chapters: this.bookForm.array([this.createChapterFormGroup()]),
+  // });
 
   constructor(private store: Store<AppState>) {}
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.form = this.createForm();
+  }
+
+  createForm(): FormGroup {
+    return this.fb.group({
+      titleFormControl: new FormControl('', [Validators.required]),
+      ISBNFormControl: new FormControl('', [Validators.required]),
+      authorFormControl: new FormControl('', [Validators.required]),
+      publisherFormControl: new FormControl(''),
+      editionFormControl: new FormControl(''),
+      publishingDateFormControl: new FormControl(''),
+      chapterDateFormControl: new FormControl('', [Validators.required]),
+      formChapters: this.fb.array([this.createChapterFormGroup]),
+    });
+  }
 
   /**
    * add book or update an existing one
    */
   addBookHandler() {
+    console.log(this.fb.group);
     const newBook: Book = {
       id: Date.now(),
       chapters: [
         {
-          title: this.bookForm.controls['chapterDateFormControl'].value || ' / / ',
+          title: this.form.get('chapterDateFormControl').value || ' / / ',
         },
       ],
-      edition: this.bookForm.controls['editionFormControl'].value || ' / / ',
-      publisher:
-        this.bookForm.controls['publisherFormControl'].value || ' / / ',
+      edition: this.form.get('editionFormControl').value || ' / / ',
+      publisher: this.form.get('publisherFormControl').value || ' / / ',
       publishingDate:
-        this.bookForm.controls['publishingDateFormControl'].value || ' / / ',
-      title: this.bookForm.controls['titleFormControl'].value,
-      author: this.bookForm.controls['authorFormControl'].value,
-      ISBN: this.bookForm.controls['ISBNFormControl'].value,
+        this.form.get('publishingDateFormControl').value || ' / / ',
+      title: this.form.get('titleFormControl').value,
+      author: this.form.get('authorFormControl').value,
+      ISBN: this.form.get('ISBNFormControl').value,
     };
     this.store.dispatch(AddInBooksList({ book: newBook }));
   }
@@ -73,6 +104,14 @@ export class BookFormComponent {
   resetHandler(formDirective: FormGroupDirective) {
     this.store.dispatch(resetActiveBook());
     formDirective.resetForm();
-    this.bookForm.reset();
+    this.form.reset();
+  }
+
+  addChapter() {
+    this.chapterFormArray.push(this.createChapterFormGroup());
+  }
+
+  private createChapterFormGroup(): FormGroup {
+    return this.fb.group({});
   }
 }
