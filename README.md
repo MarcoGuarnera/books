@@ -18,7 +18,7 @@ Also, I know that the architectural part of the project that I designed is a lit
 About the design I wanted a simple thing without too many complications.
 I didn't plan a dialog for the details at the beginning, but in the end I didn't like to show the details in the same page in another card.
 
-## Challenges I coulnd't resolve in given time
+## Challenges I couldn't resolve in given time
 
 Implement the possibility to insert multiple chapters with their title. I planned to add a formArray and autogenerate dynamic controls for the new chapters to do so. With a small " + " icon in the form I wanted add the possibility to add multiple chapters, this also would have fixed the bug that if I edit an already existing book and I set a new chapter title the previous chapters would have been overwritten.
 The implementation is simple and I already did something like this in the past but it would require a little bit more time.
