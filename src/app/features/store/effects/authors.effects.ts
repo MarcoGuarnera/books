@@ -14,6 +14,7 @@ import { Author } from 'src/app/shared/models/author';
 
 @Injectable()
 export class AuthorsEffects {
+  // load the authors from the json
   loadAuthors$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadAuthors),

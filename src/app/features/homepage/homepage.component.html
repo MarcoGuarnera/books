@@ -4,17 +4,12 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-12 col-xl-6">
+    <div class="col-sm-12">
       <app-book-form [bookActive$]="bookActive$" [authors$]="authors$">
       </app-book-form>
     </div>
 
-    <div class="col-sm-12 col-md-12 col-xl-6">
-      <app-books-list [books$]="books$" [bookActive$]="bookActive$">
-      </app-books-list>
-    </div>
-
-    <div class="col-sm-12 col-md-12 col-xl-6">
+    <div class="col-sm-12">
       <app-books-list [books$]="books$" [bookActive$]="bookActive$">
       </app-books-list>
     </div>

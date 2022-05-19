@@ -1,1 +1,72 @@
-<p>book-details works!</p>
+<ng-container *ngIf="data.book">
+  <mat-card-title>Book Details</mat-card-title>
+  <div class="container">
+    <div class="row">
+      <div class="col-4 mb-2">
+        <h2 class="m-0">Title</h2>
+        <input
+          type="text"
+          matInput
+          [ngModel]="data.book.title"
+          disabled="true"
+        />
+      </div>
+      <div class="col-4 mb-2">
+        <h2 class="m-0">Author</h2>
+        <input
+          type="text"
+          matInput
+          [ngModel]="data.book.author.givenName"
+          disabled="true"
+        />
+      </div>
+      <div class="col-4 mb-2">
+        <h2 class="m-0">Publisher</h2>
+        <input
+          type="text"
+          matInput
+          [ngModel]="data.book.publisher"
+          disabled="true"
+        />
+      </div>
+      <div class="col-4 mb-2">
+        <h2 class="m-0">Edition</h2>
+        <input
+          type="text"
+          matInput
+          [ngModel]="data.book.edition"
+          disabled="true"
+        />
+      </div>
+      <div class="col-4 mb-2">
+        <h2 class="m-0">ISBN</h2>
+        <input
+          type="text"
+          matInput
+          [ngModel]="data.book.ISBN"
+          disabled="true"
+        />
+      </div>
+      <div class="col-4 mb-2">
+        <h2 class="m-0">Publishing Date</h2>
+        <input
+          type="text"
+          matInput
+          [ngModel]="data.book.publishingDate"
+          disabled="true"
+        />
+      </div>
+      <div class="col-4 mb-2">
+        <h2 class="m-0">Chapters</h2>
+        <ng-container *ngFor="let chapter of data.book.chapters">
+          <input
+            type="text"
+            matInput
+            [ngModel]="chapter.title"
+            disabled="true"
+          />
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-container>

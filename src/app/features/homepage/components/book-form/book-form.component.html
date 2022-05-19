@@ -1,8 +1,13 @@
 <mat-card class="mat-elevation-z5 border card">
-  <mat-card-title>Add/Update Book</mat-card-title>
+  <mat-card-title class="mb-2">Add/Update Book</mat-card-title>
   <div class="form-div">
-    <form [formGroup]="bookForm" *ngIf="bookForm" (ngSubmit)="addBookHandler()">
-      <mat-form-field class="margin" appearance="fill">
+    <form
+      [formGroup]="bookForm"
+      #formDirective="ngForm"
+      *ngIf="bookForm && authors$"
+      (ngSubmit)="addBookHandler()"
+    >
+      <mat-form-field class="margin" appearance="legacy">
         <mat-label>Title</mat-label>
         <input
           type="text"
@@ -17,16 +22,16 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="margin" appearance="fill">
-        <mat-label>Select</mat-label>
-        <mat-select formControlName="authorFormControl" required>
-          <mat-option *ngFor="let author of (authors$ |async)" [value]="author">
-            <span>{{ author.givenName }}</span>
+      <mat-form-field class="margin" appearance="legacy">
+        <mat-label>Author</mat-label>
+        <mat-select formControlName="authorFormControl" required [ngModel]="(bookActive$ | async)?.author">
+          <mat-option *ngFor="let author of authors$ | async" [value]="author">
+            <span>{{ author.givenName }} {{ author.surName }}</span>
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="margin" appearance="fill">
+      <mat-form-field class="margin" appearance="legacy">
         <mat-label>ISBN</mat-label>
         <input
           type="text"
@@ -41,20 +46,73 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- <input
-        type="text"
-        name="author"
-        [ngModel]="(bookActive$ | async)?.author?.givenName"
-        required
-      /> -->
-      <!-- <input
-        type="text"
-        name="ISBN"
-        [ngModel]="(bookActive$ | async)?.ISBN"
-        required
-      /> -->
-      <button type="submit" [disabled]="!bookForm.valid">SAVE</button>
-      <button type="button" (click)="resetHandler()">RESET</button>
+      <mat-form-field class="margin" appearance="legacy">
+        <mat-label>Publisher</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="publisherFormControl"
+          placeholder="Publisher"
+          [ngModel]="(bookActive$ | async)?.publisher"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="margin" appearance="legacy">
+        <mat-label>Edition</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="editionFormControl"
+          placeholder="Edition"
+          [ngModel]="(bookActive$ | async)?.edition"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="margin" appearance="legacy">
+        <mat-label>Publishing Date</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="publishingDateFormControl"
+          placeholder="Publishing Date"
+          [ngModel]="(bookActive$ | async)?.publishingDate"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="margin" appearance="legacy">
+        <mat-label>Chapter title</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="chapterDateFormControl"
+          placeholder="Publishing Date"
+          required=""
+        />
+        <mat-error *ngIf="bookForm.get('chapterDateFormControl').invalid">
+          A chapter title is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="actionButtons">
+        <button
+          class="m-2"
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!bookForm.valid"
+        >
+          SAVE
+        </button>
+        <button
+          class="m-2"
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="resetHandler(formDirective)"
+        >
+          RESET
+        </button>
+      </div>
     </form>
   </div>
 </mat-card>

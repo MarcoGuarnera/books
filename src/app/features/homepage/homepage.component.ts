@@ -19,12 +19,14 @@ import {
   styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent {
+  // Selectors
   books$: Observable<Book[]> = this.store.pipe(select(selectAllBooks, 0));
   bookActive$: Observable<Book> = this.store.pipe(select(selectActiveBook));
   bookError$: Observable<boolean> = this.store.pipe(select(selectBookError));
   authors$: Observable<Author[]> = this.store.pipe(select(selectAllAuthors, 0));
 
   constructor(private store: Store<AppState>) {
+    // Load data
     this.store.dispatch(loadBooks());
     this.store.dispatch(loadAuthors());
   }

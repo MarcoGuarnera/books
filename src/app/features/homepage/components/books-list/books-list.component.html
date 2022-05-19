@@ -16,12 +16,21 @@
 
         <button
           mat-icon-button
-          matTooltip="Book detail and update"
+          matTooltip="Book update"
           color="primary"
           (click)="setActiveBookHandler(book)"
-          aria-label="Book detail and update"
+          aria-label="Book update"
         >
           <mat-icon>description</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matTooltip="Open book detail"
+          color="primary"
+         (click)="openDialog(book)"
+          aria-label="Open book detail"
+        >
+          <mat-icon>info</mat-icon>
         </button>
         <button
           mat-icon-button

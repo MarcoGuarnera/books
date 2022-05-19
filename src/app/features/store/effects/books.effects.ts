@@ -11,12 +11,11 @@ import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Book } from 'src/app/shared/models/book';
 import { AppState } from 'src/app/app.module';
-import { loadAuthors, loadAuthorsFailed, loadAuthorsSuccess } from '../actions/authors.actions';
-import { Author } from 'src/app/shared/models/author';
 
 @Injectable()
 export class BooksEffects {
-  loadProducts$ = createEffect(() =>
+  // load the books from the json
+  loadBooks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadBooks),
       switchMap(() =>

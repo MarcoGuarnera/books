@@ -14,6 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
+import { DialogBookDetailsComponent } from './components/dialog-book-details/dialog-book-details.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
@@ -29,6 +31,7 @@ const routes: Routes = [
     BooksListComponent,
     BookFormComponent,
     BookDetailsComponent,
+    DialogBookDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +43,7 @@ const routes: Routes = [
     MatTooltipModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatDialogModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     SharedModule,

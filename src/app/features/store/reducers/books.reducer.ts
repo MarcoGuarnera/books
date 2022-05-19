@@ -39,7 +39,7 @@ export const booksReducer = createReducer(
       return {
         error: false,
         active: {} as Book,
-        books: [...state.books, { ...action.book, id: Date.now()}],
+        books: [...state.books, { ...action.book, id: Date.now() }],
       };
     }
   }),
@@ -69,15 +69,3 @@ export const booksReducer = createReducer(
     };
   })
 );
-
-// on(editBooks, (state, action) => {
-//   return {
-//     active: { ...state.active, ...action.book },
-//     books: state.books.map((p) => {
-//       if (p.id === state.active.id) {
-//         return { ...p, ...action.book };
-//       }
-//       return p;
-//     }),
-//   };
-// })

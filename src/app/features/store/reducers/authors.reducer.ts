@@ -1,6 +1,9 @@
-import { createReducer, on } from "@ngrx/store";
-import { Author } from "src/app/shared/models/author";
-import { loadAuthorsFailed, loadAuthorsSuccess } from "../actions/authors.actions";
+import { createReducer, on } from '@ngrx/store';
+import { Author } from 'src/app/shared/models/author';
+import {
+  loadAuthorsFailed,
+  loadAuthorsSuccess,
+} from '../actions/authors.actions';
 
 export interface AuthorsState {
   authors: Author[];
@@ -12,7 +15,6 @@ export const initialState: AuthorsState = {
   error: false,
 };
 
-
 export const authorsReducer = createReducer(
   initialState,
 
@@ -21,5 +23,5 @@ export const authorsReducer = createReducer(
     ...state,
     authors: action.authors,
     error: false,
-  })),
+  }))
 );
